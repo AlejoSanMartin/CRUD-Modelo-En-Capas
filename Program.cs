@@ -224,41 +224,50 @@ namespace TP1_GRUPO4
             }
             asistente.id = id_verificado;
 
-            Console.WriteLine("Ingrese su nombre: ");
-            asistente.nombre = Console.ReadLine();
-            Console.WriteLine("Ingrese su apellido: ");
-            asistente.apellido = Console.ReadLine();
-
-
-            Console.WriteLine("Ingrese su edad: ");
-
-            short edad_verificada;
-            bool edad_checked = short.TryParse(Console.ReadLine(), out edad_verificada);
-
-            if (!edad_checked)
+            if (actividad.Read(id_verificado)!= null)
             {
-                asistente.edad = 0;
-            }else{
-                asistente.edad = edad_verificada;
-            }
+                Console.WriteLine("Ingrese su nombre: ");
+                asistente.nombre = Console.ReadLine();
+                Console.WriteLine("Ingrese su apellido: ");
+                asistente.apellido = Console.ReadLine();
 
 
-            Console.WriteLine("Ingrese su turno: ");
-            asistente.turno = Console.ReadLine();
-            Console.WriteLine("Ingrese su descripcion: ");
-            asistente.descripcion = Console.ReadLine();
+                Console.WriteLine("Ingrese su edad: ");
 
-            bool actualizado = actividad.Update(asistente);
+                short edad_verificada;
+                bool edad_checked = short.TryParse(Console.ReadLine(), out edad_verificada);
 
-            if (actualizado)
-            {
-                Console.WriteLine("Asistente actualizado");
+                if (!edad_checked)
+                {
+                    asistente.edad = 0;
+                }
+                else
+                {
+                    asistente.edad = edad_verificada;
+                }
+
+
+                Console.WriteLine("Ingrese su turno: ");
+                asistente.turno = Console.ReadLine();
+                Console.WriteLine("Ingrese su descripcion: ");
+                asistente.descripcion = Console.ReadLine();
+
+                bool actualizado = actividad.Update(asistente);
+
+                if (actualizado)
+                {
+                    Console.WriteLine("Asistente actualizado");
+                }
+                else
+                {
+                    Console.WriteLine("Asistente no actualizado");
+                }
             }
             else
             {
-                Console.WriteLine("Asistente no actualizado");
+                Console.WriteLine("No se encontro un asistente con ese ID");
             }
-
+           
             Console.ReadKey();
             Main();
 
